@@ -1,0 +1,16 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "uithub_size"
+main = "main.ts"
+compatibility_date = "2025-01-05"
+routes = [{ pattern = "size.uithub.com", custom_domain = true }]
+
+[[kv_namespaces]]
+binding = "tokens"
+id = "5c1ab1ebb8ce46c7a85f10ac37b96bee"
+
+[[queues.producers]]
+queue = "size"
+binding = "size"
+
+[[queues.consumers]]
+queue = "size"
