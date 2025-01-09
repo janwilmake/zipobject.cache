@@ -2,4 +2,5 @@
 name = "uithub_size"
 main = "main.ts"
 compatibility_date = "2025-01-05"
+assets = { directory = "./public" }
 routes = [{ pattern = "size.uithub.com", custom_domain = true }]

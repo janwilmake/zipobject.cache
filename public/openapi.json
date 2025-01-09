@@ -1,0 +1,122 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Repository Size Metrics API",
+    "description": "API to retrieve size metrics for GitHub repositories via UIthub",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://size.uithub.com",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/{owner}/{repo}": {
+      "get": {
+        "summary": "Get repository size metrics",
+        "description": "Returns token, character, and line counts for a GitHub repository",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "description": "GitHub repository owner",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "description": "GitHub repository name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apiKey",
+            "in": "query",
+            "required": false,
+            "description": "API key for authentication",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with repository metrics",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "size": {
+                      "type": "object",
+                      "properties": {
+                        "tokens": {
+                          "type": "integer",
+                          "description": "Number of tokens in the repository",
+                          "example": 29586
+                        },
+                        "totalTokens": {
+                          "type": "integer",
+                          "description": "Total number of tokens including omitted ones",
+                          "example": 29596
+                        },
+                        "characters": {
+                          "type": "integer",
+                          "description": "Total number of characters in the repository",
+                          "example": 147980
+                        },
+                        "lines": {
+                          "type": "integer",
+                          "description": "Total number of lines in the repository",
+                          "example": 3783
+                        }
+                      },
+                      "required": [
+                        "tokens",
+                        "totalTokens",
+                        "characters",
+                        "lines"
+                      ]
+                    }
+                  },
+                  "required": ["size"]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Repository not found or invalid path",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Need /owner/repo in path (and optional branch+location)"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Enter the API token"
+      }
+    }
+  }
+}
