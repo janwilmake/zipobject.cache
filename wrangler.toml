@@ -1,6 +1,6 @@
 #:schema node_modules/wrangler/config-schema.json
-name = "zipobject_size"
+name = "zipobject_cache"
 main = "main.ts"
 compatibility_date = "2025-01-05"
 assets = { directory = "./public" }
-routes = [{ pattern = "size.zipobject.com", custom_domain = true }]
+routes = [{ pattern = "cache.zipobject.com", custom_domain = true }]
