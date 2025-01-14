@@ -12,8 +12,15 @@ export default {
         { status: 404 },
       );
     }
-    const apiKeyPart = apiKey ? `&apiKey=${apiKey}` : "";
-    const staleUithubUrl = `https://nachocache.com/1w/stale/https://uithub.com${url.pathname}?omitFiles=true&omitTree=true&accept=application/json${apiKeyPart}`;
+
+    const staleUithubUrl = new URL(
+      `https://nachocache.com/1w/stale/https://zipobject.com/github.com${url.pathname}`,
+    );
+    staleUithubUrl.searchParams.set("omitFiles", "true");
+    staleUithubUrl.searchParams.set("omitTree", "true");
+    if (apiKey) {
+      staleUithubUrl.searchParams.set("apiKey", "apiKey");
+    }
     const response = await fetch(staleUithubUrl);
     console.log({ staleUithubUrl });
     return response;
