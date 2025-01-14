@@ -18,8 +18,6 @@ export default {
     if (apiKey) {
       staleUithubUrl.searchParams.set("apiKey", "apiKey");
     }
-    staleUithubUrl.searchParams.set("omitFiles", "true");
-    staleUithubUrl.searchParams.set("omitTree", "true");
 
     const response = await fetch(staleUithubUrl);
     return response;
