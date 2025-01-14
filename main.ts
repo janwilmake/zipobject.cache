@@ -1,9 +1,10 @@
+const DOMAIN = "zipobject.com";
 export default {
   fetch: async (request: Request) => {
     const url = new URL(request.url);
 
     const staleUithubUrl = new URL(
-      `https://nachocache.com/1w/stale/https://zipobject.com/${url.pathname}`,
+      `https://nachocache.com/1w/stale/https://${DOMAIN}/${url.pathname}`,
     );
     // take over the params
     url.searchParams.forEach((value, key) => {
